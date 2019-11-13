@@ -57,6 +57,10 @@ public class AMRMTokenSelector implements
 
   private boolean checkService(Text service,
       Token<? extends TokenIdentifier> token) {
+    if (service.toString().contains("127.0.0.1")) {
+      // For yarn federation
+      return true;
+    }
     if (service == null || token.getService() == null) {
       return false;
     }

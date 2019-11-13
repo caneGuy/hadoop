@@ -177,6 +177,7 @@ public class AMRMProxyService extends CompositeService implements
         this.server.refreshServiceAcl(conf, NMPolicyProvider.getInstance());
     }
 
+    this.server.refreshServiceAcl(conf, AMRMPolicyProvider.getInstance());
     this.server.start();
     LOG.info("AMRMProxyService listening on address: "
         + this.server.getListenerAddress());

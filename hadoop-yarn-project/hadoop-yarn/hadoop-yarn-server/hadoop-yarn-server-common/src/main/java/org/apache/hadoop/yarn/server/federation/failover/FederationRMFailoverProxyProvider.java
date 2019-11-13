@@ -169,8 +169,11 @@ public class FederationRMFailoverProxyProvider<T>
         conf.set(YarnConfiguration.RM_ADDRESS,
             subClusterInfo.getClientRMServiceAddress());
       } else if (protocol == ApplicationMasterProtocol.class) {
-        conf.set(YarnConfiguration.RM_SCHEDULER_ADDRESS,
-            subClusterInfo.getAMRMServiceAddress());
+        if (!conf.get(YarnConfiguration.RM_SCHEDULER_ADDRESS)
+                .contains("localhost")) {
+          conf.set(YarnConfiguration.RM_SCHEDULER_ADDRESS,
+                  subClusterInfo.getAMRMServiceAddress());
+        }
       } else if (protocol == ResourceManagerAdministrationProtocol.class) {
         conf.set(YarnConfiguration.RM_ADMIN_ADDRESS,
             subClusterInfo.getRMAdminServiceAddress());
